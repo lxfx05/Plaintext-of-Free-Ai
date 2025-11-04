@@ -1,87 +1,91 @@
 ## Tree view of Chatbot 
 ```
+# 📁 Offline Dev Chatbot — Project Tree View
+
+```plaintext
 offline-dev-chatbot/
-├── README.md                       # Descrizione generale e setup
-├── LICENSE                         # Licenza del progetto
-├── .gitignore                      # File e cartelle da escludere da Git
-├── requirements.txt                # Dipendenze Python (FastAPI, llama-cpp, ecc.)
-├── Dockerfile                      # Costruzione container offline
-├── setup.sh                        # Script rapido di configurazione
+├── README.md                       # General description and setup guide
+├── LICENSE                         # Project license
+├── .gitignore                      # Files and folders excluded from Git
+├── requirements.txt                # Python dependencies (FastAPI, llama-cpp, etc.)
+├── Dockerfile                      # Offline container build
+├── setup.sh                        # Quick setup script
 │
-├── backend/                        # Backend principale in Python (FastAPI)
-│   ├── app.py                      # Entry point del server API (Mode1, Mode2)
-│   ├── config.py                   # Configurazioni globali
-│   ├── local_llm.py                # Wrapper per il modello LLM locale
+├── backend/                        # Main backend in Python (FastAPI)
+│   ├── app.py                      # API server entry point (Mode1, Mode2)
+│   ├── config.py                   # Global configurations
+│   ├── local_llm.py                # Wrapper for the local LLM model
 │   │
-│   ├── prompts/                    # Prompt predefiniti per LLM
-│   │   ├── system_prompt.txt       # Prompt di sistema base
+│   ├── prompts/                    # Predefined prompts for the LLM
+│   │   ├── system_prompt.txt       # Base system prompt
 │   │   └── templates/
-│   │       ├── clarify_prompt.txt  # Prompt per chiedere chiarimenti
-│   │       ├── generator_prompt.txt# Prompt per generazione codice/progetto
-│   │       └── code_explainer_prompt.txt # Prompt per spiegazioni del codice
+│   │       ├── clarify_prompt.txt  # Prompt for clarification requests
+│   │       ├── generator_prompt.txt# Prompt for code/project generation
+│   │       └── code_explainer_prompt.txt # Prompt for code explanations
 │   │
-│   ├── code_check/                 # Moduli di verifica del codice (Mode 1)
+│   ├── code_check/                 # Code verification modules (Mode 1)
 │   │   ├── __init__.py
-│   │   ├── python_checker.py       # Analisi Python (ast, flake8)
-│   │   ├── java_checker.py         # Compilazione e analisi .java
-│   │   ├── cpp_checker.py          # g++ -fsyntax-only
-│   │   ├── js_checker.py           # eslint locale via Node
+│   │   ├── python_checker.py       # Python analysis (AST, flake8)
+│   │   ├── java_checker.py         # Java compilation and syntax analysis
+│   │   ├── cpp_checker.py          # g++ -fsyntax-only validation
+│   │   ├── js_checker.py           # Local ESLint via Node
 │   │   ├── go_checker.py           # go vet / go fmt
-│   │   └── sql_checker.py          # sqlparse o sqlite3 parser
+│   │   └── sql_checker.py          # sqlparse or sqlite3 parser
 │   │
-│   ├── models/                     # Area per modelli LLM locali
-│   │   ├── README.txt              # Istruzioni su dove mettere i pesi
-│   │   ├── model.gguf              # File del modello Llama, Phi, Mistral ecc.
-│   │   └── tokenizer.model         # Tokenizer compatibile
+│   ├── models/                     # Directory for local LLM models
+│   │   ├── README.txt              # Instructions on where to place model weights
+│   │   ├── model.gguf              # Model file (Llama, Phi, Mistral, etc.)
+│   │   └── tokenizer.model         # Compatible tokenizer
 │   │
-│   ├── utils/                      # Strumenti di supporto
-│   │   ├── sandbox_runner.py       # Sandbox opzionale per codice
-│   │   ├── diff_utils.py           # Generatore di patch/fix
-│   │   ├── file_ops.py             # Gestione file temporanei
-│   │   └── logging_utils.py        # Logger centralizzato
+│   ├── utils/                      # Utility modules
+│   │   ├── sandbox_runner.py       # Optional sandbox for safe code execution
+│   │   ├── diff_utils.py           # Patch/fix generator
+│   │   ├── file_ops.py             # Temporary file handling
+│   │   └── logging_utils.py        # Centralized logger
 │   │
-│   └── tests/                      # Test automatici backend
+│   └── tests/                      # Automated backend tests
 │       ├── test_api.py
 │       ├── test_checkers.py
 │       └── test_llm.py
 │
-├── frontend/                       # Interfaccia utente locale (HTML + CSS + JS)
-│   ├── index.html                  # Pagina principale stile ChatGPT
-│   ├── main.js                     # Gestione logica chat/API
-│   ├── style.css                   # Tema dark mode
+├── frontend/                       # Local frontend (HTML + CSS + JS)
+│   ├── index.html                  # Main ChatGPT-style UI
+│   ├── main.js                     # Chat/API logic
+│   ├── style.css                   # Dark mode theme
 │   │
-│   ├── assets/                     # Risorse grafiche
+│   ├── assets/                     # Graphic resources
 │   │   ├── logo.svg
 │   │   └── icons/
 │   │       ├── send.svg
 │   │       ├── code.svg
 │   │       └── terminal.svg
 │   │
-│   └── components/                 # Parti modulari UI
-│       ├── chat_ui.html            # Layout chat
-│       ├── code_result.html        # Risultati checker
-│       └── project_viewer.html     # Vista file generati
+│   └── components/                 # Modular UI components
+│       ├── chat_ui.html            # Chat layout
+│       ├── code_result.html        # Code checker result view
+│       └── project_viewer.html     # Generated project file viewer
 │
-├── data/                           # Dati locali (tutto offline)
-│   ├── history.db                  # SQLite per cronologia
+├── data/                           # Local data (fully offline)
+│   ├── history.db                  # SQLite chat/code history
 │   ├── logs/
 │   │   ├── app.log
 │   │   └── error.log
 │   └── cache/
-│       └── temp_code/              # File temporanei checker
+│       └── temp_code/              # Temporary files generated by checkers
 │
-├── scripts/                        # Script di supporto
-│   ├── download_model.sh           # Scarica pesi modello
-│   ├── build_frontend.sh           # Compila Tailwind
-│   ├── run_server.sh               # Avvio backend + frontend
-│   └── sandbox_test.sh             # Test di sicurezza
+├── scripts/                        # Support scripts
+│   ├── download_model.sh           # Download LLM weights
+│   ├── build_frontend.sh           # Build Tailwind CSS
+│   ├── run_server.sh               # Run backend + frontend
+│   └── sandbox_test.sh             # Security testing
 │
-└── docs/                           # Documentazione tecnica
-    ├── SYSTEM_OVERVIEW.md          # Architettura e componenti
-    ├── API_REFERENCE.md            # Chatbot /mode1 e /mode2
-    ├── LOCAL_SETUP.md              # Installazione offline
-    ├── SECURITY_NOTES.md           # Linee guida sicurezza
-    └── MODEL_GUIDE.md              # Guida ai modelli compatibili
+└── docs/                           # Technical documentation
+    ├── SYSTEM_OVERVIEW.md          # Architecture and components
+    ├── API_REFERENCE.md            # Endpoint details (/mode1, /mode2)
+    ├── LOCAL_SETUP.md              # Offline setup instructions
+    ├── SECURITY_NOTES.md           # Security guidelines
+    └── MODEL_GUIDE.md              # Guide for compatible LLM models
+
 ```
 
 ## 💡 Have an Idea?
