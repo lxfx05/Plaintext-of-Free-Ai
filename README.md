@@ -1,5 +1,6 @@
-# Plaintext-of-Free-Ai
+# 📁 Offline Dev Chatbot — Project Tree View
 
+```plaintext
 offline-dev-chatbot/
 ├── README.md                       # Descrizione generale e setup
 ├── LICENSE                         # Licenza del progetto
@@ -10,8 +11,8 @@ offline-dev-chatbot/
 │
 ├── backend/                        # Backend principale in Python (FastAPI)
 │   ├── app.py                      # Entry point del server API (Mode1, Mode2)
-│   ├── config.py                   # Configurazioni globali (porte, percorsi modelli, ecc.)
-│   ├── local_llm.py                # Wrapper per il modello LLM locale (llama-cpp / transformers)
+│   ├── config.py                   # Configurazioni globali
+│   ├── local_llm.py                # Wrapper per il modello LLM locale
 │   │
 │   ├── prompts/                    # Prompt predefiniti per LLM
 │   │   ├── system_prompt.txt       # Prompt di sistema base
@@ -35,9 +36,9 @@ offline-dev-chatbot/
 │   │   └── tokenizer.model         # Tokenizer compatibile
 │   │
 │   ├── utils/                      # Strumenti di supporto
-│   │   ├── sandbox_runner.py       # Sandbox opzionale per eseguire codice in sicurezza
-│   │   ├── diff_utils.py           # Generatore di patch/suggerimenti di fix
-│   │   ├── file_ops.py             # Operazioni su file temporanei
+│   │   ├── sandbox_runner.py       # Sandbox opzionale per codice
+│   │   ├── diff_utils.py           # Generatore di patch/fix
+│   │   ├── file_ops.py             # Gestione file temporanei
 │   │   └── logging_utils.py        # Logger centralizzato
 │   │
 │   └── tests/                      # Test automatici backend
@@ -47,8 +48,8 @@ offline-dev-chatbot/
 │
 ├── frontend/                       # Interfaccia utente locale (HTML + CSS + JS)
 │   ├── index.html                  # Pagina principale stile ChatGPT
-│   ├── main.js                     # Gestione logica chat e chiamate API
-│   ├── style.css                   # Tema dark mode (Tailwind o CSS custom)
+│   ├── main.js                     # Gestione logica chat/API
+│   ├── style.css                   # Tema dark mode
 │   │
 │   ├── assets/                     # Risorse grafiche
 │   │   ├── logo.svg
@@ -57,29 +58,28 @@ offline-dev-chatbot/
 │   │       ├── code.svg
 │   │       └── terminal.svg
 │   │
-│   └── components/                 # Parti modulari dell’interfaccia
-│       ├── chat_ui.html            # Struttura conversazionale
-│       ├── code_result.html        # Visualizzazione risultati checker
-│       └── project_viewer.html     # Vista file generati (modo 2)
+│   └── components/                 # Parti modulari UI
+│       ├── chat_ui.html            # Layout chat
+│       ├── code_result.html        # Risultati checker
+│       └── project_viewer.html     # Vista file generati
 │
 ├── data/                           # Dati locali (tutto offline)
-│   ├── history.db                  # Database SQLite per cronologia chat/code
+│   ├── history.db                  # SQLite per cronologia
 │   ├── logs/
 │   │   ├── app.log
 │   │   └── error.log
 │   └── cache/
-│       └── temp_code/              # File temporanei creati dai checkers
+│       └── temp_code/              # File temporanei checker
 │
 ├── scripts/                        # Script di supporto
-│   ├── download_model.sh           # Scarica i pesi del modello (manuale/offline)
-│   ├── build_frontend.sh           # Compila Tailwind o bundle statici
-│   ├── run_server.sh               # Avvio locale completo (backend + frontend)
-│   └── sandbox_test.sh             # Test di sicurezza su codice utente
+│   ├── download_model.sh           # Scarica pesi modello
+│   ├── build_frontend.sh           # Compila Tailwind
+│   ├── run_server.sh               # Avvio backend + frontend
+│   └── sandbox_test.sh             # Test di sicurezza
 │
-└── docs/                           # Documentazione tecnica e guida d’uso
+└── docs/                           # Documentazione tecnica
     ├── SYSTEM_OVERVIEW.md          # Architettura e componenti
-    ├── API_REFERENCE.md            # Descrizione endpoint /mode1 e /mode2
-    ├── LOCAL_SETUP.md              # Istruzioni installazione offline
-    ├── SECURITY_NOTES.md           # Linee guida sicurezza e sandbox
-    └── MODEL_GUIDE.md              # Modelli supportati e formati compatibili
-    
+    ├── API_REFERENCE.md            # Chatbot /mode1 e /mode2
+    ├── LOCAL_SETUP.md              # Installazione offline
+    ├── SECURITY_NOTES.md           # Linee guida sicurezza
+    └── MODEL_GUIDE.md              # Guida ai modelli compatibili
