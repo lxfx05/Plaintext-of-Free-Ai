@@ -3,180 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offline Dev Chatbot — Project Tree View</title>
+<title>Offline Dev Chatbot — Tree View</title>
 <style>
   body {
-    background: #0b1220;
-    color: #e8eef8;
+    background-color: #0f172a;
+    color: #e2e8f0;
     font-family: "JetBrains Mono", monospace;
-    font-size: 14px;
-    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
     padding: 40px;
   }
+  .box {
+    background-color: #1e293b;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    width: 90%;
+    max-width: 900px;
+    overflow-x: auto;
+  }
+  pre {
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre;
+  }
   h1 {
+    color: #60a5fa;
     font-size: 22px;
     margin-bottom: 20px;
-    color: #60a5fa;
-  }
-  ul.tree {
-    list-style: none;
-    padding-left: 20px;
-  }
-  li {
-    position: relative;
-    margin: 2px 0;
-    cursor: default;
-    transition: transform 0.1s ease-in-out;
-  }
-  li:hover {
-    transform: scale(1.02);
-  }
-  li::before {
-    content: "├──";
-    position: absolute;
-    left: -25px;
-    color: #3b82f6;
-  }
-  li:last-child::before {
-    content: "└──";
-  }
-  .folder {
-    color: #7dd3fc;
-    cursor: pointer;
-  }
-  .file {
-    color: #a3a3a3;
-  }
-  .hidden {
-    display: none;
-  }
-  .indent {
-    margin-left: 20px;
-  }
-  .comment {
-    color: #64748b;
-    font-style: italic;
   }
 </style>
 </head>
 <body>
-<h1>📁 Offline Dev Chatbot — Tree View</h1>
-
-<ul class="tree">
-  <li class="folder" onclick="toggle(this)">offline-dev-chatbot/
-    <ul>
-      <li class="file">README.md</li>
-      <li class="file">LICENSE</li>
-      <li class="file">.gitignore</li>
-      <li class="file">requirements.txt</li>
-      <li class="file">Dockerfile</li>
-      <li class="file">setup.sh</li>
-
-      <li class="folder" onclick="toggle(this)">backend/
-        <ul>
-          <li class="file">app.py <span class="comment"># FastAPI server (entrypoint)</span></li>
-          <li class="file">config.py <span class="comment"># Configurazioni di base</span></li>
-          <li class="file">local_llm.py <span class="comment"># Integrazione modello LLM locale</span></li>
-
-          <li class="folder" onclick="toggle(this)">prompts/
-            <ul>
-              <li class="file">system_prompt.txt</li>
-              <li class="folder" onclick="toggle(this)">templates/
-                <ul>
-                  <li class="file">clarify_prompt.txt</li>
-                  <li class="file">generator_prompt.txt</li>
-                  <li class="file">code_explainer_prompt.txt</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-
-          <li class="folder" onclick="toggle(this)">code_check/
-            <ul>
-              <li class="file">python_checker.py</li>
-              <li class="file">java_checker.py</li>
-              <li class="file">cpp_checker.py</li>
-              <li class="file">js_checker.py</li>
-              <li class="file">go_checker.py</li>
-              <li class="file">sql_checker.py</li>
-            </ul>
-          </li>
-
-          <li class="folder" onclick="toggle(this)">models/
-            <ul>
-              <li class="file">model.gguf <span class="comment"># File del modello locale</span></li>
-              <li class="file">tokenizer.model</li>
-            </ul>
-          </li>
-
-          <li class="folder" onclick="toggle(this)">utils/
-            <ul>
-              <li class="file">sandbox_runner.py</li>
-              <li class="file">diff_utils.py</li>
-              <li class="file">file_ops.py</li>
-              <li class="file">logging_utils.py</li>
-            </ul>
-          </li>
-
-          <li class="folder" onclick="toggle(this)">tests/
-            <ul>
-              <li class="file">test_api.py</li>
-              <li class="file">test_checkers.py</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-
-      <li class="folder" onclick="toggle(this)">frontend/
-        <ul>
-          <li class="file">index.html</li>
-          <li class="file">main.js</li>
-          <li class="file">style.css</li>
-          <li class="folder" onclick="toggle(this)">assets/
-            <ul>
-              <li class="file">logo.svg</li>
-              <li class="file">icons/</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-
-      <li class="folder" onclick="toggle(this)">data/
-        <ul>
-          <li class="file">history.db</li>
-          <li class="file">logs/</li>
-          <li class="file">cache/</li>
-        </ul>
-      </li>
-
-      <li class="folder" onclick="toggle(this)">scripts/
-        <ul>
-          <li class="file">download_model.sh</li>
-          <li class="file">build_frontend.sh</li>
-          <li class="file">run_server.sh</li>
-        </ul>
-      </li>
-
-      <li class="folder" onclick="toggle(this)">docs/
-        <ul>
-          <li class="file">overview.md</li>
-          <li class="file">api_reference.md</li>
-          <li class="file">local_setup.md</li>
-          <li class="file">security_notes.md</li>
-          <li class="file">model_guide.md</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<script>
-function toggle(el) {
-  // prevent event bubbling
-  event.stopPropagation();
-  const nested = el.querySelector(':scope > ul');
-  if (nested) nested.classList.toggle('hidden');
-}
-</script>
+  <div class="box">
+    <h1>📁 Offline Dev Chatbot — Project Tree View</h1>
+<pre>
+offline-dev-chatbot/
+├── README.md
+├── LICENSE
+├── .gitignore
+├── requirements.txt
+├── Dockerfile
+├── setup.sh
+│
+├── backend/
+│   ├── app.py                # FastAPI server (entrypoint)
+│   ├── config.py             # Configurazioni di base
+│   ├── local_llm.py          # Integrazione modello LLM locale
+│   │
+│   ├── prompts/
+│   │   ├── system_prompt.txt
+│   │   └── templates/
+│   │       ├── clarify_prompt.txt
+│   │       ├── generator_prompt.txt
+│   │       └── code_explainer_prompt.txt
+│   │
+│   ├── code_check/
+│   │   ├── python_checker.py
+│   │   ├── java_checker.py
+│   │   ├── cpp_checker.py
+│   │   ├── js_checker.py
+│   │   ├── go_checker.py
+│   │   └── sql_checker.py
+│   │
+│   ├── models/
+│   │   ├── model.gguf              # File del modello locale
+│   │   └── tokenizer.model
+│   │
+│   ├── utils/
+│   │   ├── sandbox_runner.py
+│   │   ├── diff_utils.py
+│   │   ├── file_ops.py
+│   │   └── logging_utils.py
+│   │
+│   └── tests/
+│       ├── test_api.py
+│       └── test_checkers.py
+│
+├── frontend/
+│   ├── index.html
+│   ├── main.js
+│   ├── style.css
+│   └── assets/
+│       ├── logo.svg
+│       └── icons/
+│
+├── data/
+│   ├── history.db
+│   ├── logs/
+│   └── cache/
+│
+├── scripts/
+│   ├── download_model.sh
+│   ├── build_frontend.sh
+│   └── run_server.sh
+│
+└── docs/
+    ├── overview.md
+    ├── api_reference.md
+    ├── local_setup.md
+    ├── security_notes.md
+    └── model_guide.md
+</pre>
+  </div>
 </body>
 </html>
