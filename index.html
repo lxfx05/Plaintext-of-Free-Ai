@@ -1,135 +1,212 @@
+
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offline Dev Chatbot — Project Tree View</title>
-<style>
-  body {
-    background-color: #0f172a;
-    color: #e2e8f0;
-    font-family: "JetBrains Mono", monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 6px;
-  }
-  .box {
-    background-color: #1e293b;
-    border-radius: 8px;
-    padding: 6px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-    width: 95%;
-    max-width: 950px;
-    overflow-x: auto;
-  }
-  h1 {
-    color: #60a5fa;
-    font-size: 18px;
-    margin: 6px 0 12px 0;
-    text-align: center;
-  }
-  pre {
-    color: #cbd5e1;
-    font-size: 13px;
-    line-height: 1.5;
-    white-space: pre;
-    margin: 0;
-  }
-  .folder { color: #7dd3fc; }
-  .file { color: #f1f5f9; }
-  .comment { color: #64748b; font-style: italic; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline Dev Chatbot — Ideas</title>
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      font-family: "JetBrains Mono", monospace;
+      margin: 0;
+      padding: 0;
+}
+.tabs {
+      display: flex;
+      background-color: #1e293b;
+      border-bottom: 2px solid #334155;
+}
+.tab {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      color: #cbd5e1;
+      border-right: 1px solid #334155;
+      transition: background 0.3s;
+}
+.tab:hover {
+      background-color: #334155;
+}
+.tab.active {
+      background-color: #0f172a;
+      color: #60a5fa;
+      font-weight: bold;
+}
+.content {
+      padding: 16px;
+}
+.box {
+      background-color: #1e293b;
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      overflow-x: auto;
+}
+    h1 {
+      color: #60a5fa;
+      font-size: 18px;
+      margin-bottom: 12px;
+      text-align: center;
+}
+    pre {
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.5;
+      white-space: pre;
+      margin: 0;
+}
+.folder { color: #7dd3fc;}
+.file { color: #f1f5f9;}
+.comment { color: #64748b; font-style: italic;}
+  </style>
 </head>
 <body>
-  <div class="box">
-    <h1>📁 Offline Dev Chatbot — Project Tree View</h1>
-<pre>
-<span class="folder">offline-dev-chatbot/</span>
-├── <span class="file">README.md</span>                       <span class="comment"># Descrizione generale e setup</span>
-├── <span class="file">LICENSE</span>                         <span class="comment"># Licenza del progetto</span>
-├── <span class="file">.gitignore</span>                      <span class="comment"># File e cartelle da escludere da Git</span>
-├── <span class="file">requirements.txt</span>                <span class="comment"># Dipendenze Python (FastAPI, llama-cpp, ecc.)</span>
-├── <span class="file">Dockerfile</span>                      <span class="comment"># Costruzione container offline</span>
-├── <span class="file">setup.sh</span>                        <span class="comment"># Script rapido di configurazione</span>
-│
-├── <span class="folder">backend/</span>                        <span class="comment"># Backend principale in Python (FastAPI)</span>
-│   ├── <span class="file">app.py</span>                      <span class="comment"># Entry point del server API (Mode1, Mode2)</span>
-│   ├── <span class="file">config.py</span>                   <span class="comment"># Configurazioni globali</span>
-│   ├── <span class="file">local_llm.py</span>                <span class="comment"># Wrapper per il modello LLM locale</span>
-│   │
-│   ├── <span class="folder">prompts/</span>                    <span class="comment"># Prompt predefiniti per LLM</span>
-│   │   ├── <span class="file">system_prompt.txt</span>       <span class="comment"># Prompt di sistema base</span>
-│   │   └── <span class="folder">templates/</span>
-│   │       ├── <span class="file">clarify_prompt.txt</span>  <span class="comment"># Prompt per chiedere chiarimenti</span>
-│   │       ├── <span class="file">generator_prompt.txt</span><span class="comment"># Prompt per generazione codice/progetto</span>
-│   │       └── <span class="file">code_explainer_prompt.txt</span><span class="comment"># Prompt per spiegazioni del codice</span>
-│   │
-│   ├── <span class="folder">code_check/</span>                 <span class="comment"># Moduli di verifica del codice (Mode 1)</span>
-│   │   ├── <span class="file">__init__.py</span>
-│   │   ├── <span class="file">python_checker.py</span>       <span class="comment"># Analisi Python (ast, flake8)</span>
-│   │   ├── <span class="file">java_checker.py</span>         <span class="comment"># Compilazione e analisi .java</span>
-│   │   ├── <span class="file">cpp_checker.py</span>          <span class="comment"># g++ -fsyntax-only</span>
-│   │   ├── <span class="file">js_checker.py</span>           <span class="comment"># eslint locale via Node</span>
-│   │   ├── <span class="file">go_checker.py</span>           <span class="comment"># go vet / go fmt</span>
-│   │   └── <span class="file">sql_checker.py</span>          <span class="comment"># sqlparse o sqlite3 parser</span>
-│   │
-│   ├── <span class="folder">models/</span>                     <span class="comment"># Area per modelli LLM locali</span>
-│   │   ├── <span class="file">README.txt</span>              <span class="comment"># Istruzioni su dove mettere i pesi</span>
-│   │   ├── <span class="file">model.gguf</span>              <span class="comment"># File del modello Llama, Phi, Mistral ecc.</span>
-│   │   └── <span class="file">tokenizer.model</span>         <span class="comment"># Tokenizer compatibile</span>
-│   │
-│   ├── <span class="folder">utils/</span>                      <span class="comment"># Strumenti di supporto</span>
-│   │   ├── <span class="file">sandbox_runner.py</span>       <span class="comment"># Sandbox opzionale per codice</span>
-│   │   ├── <span class="file">diff_utils.py</span>           <span class="comment"># Generatore di patch/fix</span>
-│   │   ├── <span class="file">file_ops.py</span>             <span class="comment"># Gestione file temporanei</span>
-│   │   └── <span class="file">logging_utils.py</span>        <span class="comment"># Logger centralizzato</span>
-│   │
-│   └── <span class="folder">tests/</span>                      <span class="comment"># Test automatici backend</span>
-│       ├── <span class="file">test_api.py</span>
-│       ├── <span class="file">test_checkers.py</span>
-│       └── <span class="file">test_llm.py</span>
-│
-├── <span class="folder">frontend/</span>                       <span class="comment"># Interfaccia utente locale (HTML + CSS + JS)</span>
-│   ├── <span class="file">index.html</span>                  <span class="comment"># Pagina principale stile Chatbot</span>
-│   ├── <span class="file">main.js</span>                     <span class="comment"># Gestione logica chat/API</span>
-│   ├── <span class="file">style.css</span>                   <span class="comment"># Tema dark mode</span>
-│   │
-│   ├── <span class="folder">assets/</span>                    <span class="comment"># Risorse grafiche</span>
-│   │   ├── <span class="file">logo.svg</span>
-│   │   └── <span class="folder">icons/</span>
-│   │       ├── <span class="file">send.svg</span>
-│   │       ├── <span class="file">code.svg</span>
-│   │       └── <span class="file">terminal.svg</span>
-│   │
-│   └── <span class="folder">components/</span>                <span class="comment"># Parti modulari UI</span>
-│       ├── <span class="file">chat_ui.html</span>            <span class="comment"># Layout chat</span>
-│       ├── <span class="file">code_result.html</span>        <span class="comment"># Risultati checker</span>
-│       └── <span class="file">project_viewer.html</span>     <span class="comment"># Vista file generati</span>
-│
-├── <span class="folder">data/</span>                           <span class="comment"># Dati locali (tutto offline)</span>
-│   ├── <span class="file">history.db</span>                  <span class="comment"># SQLite per cronologia</span>
-│   ├── <span class="folder">logs/</span>
-│   │   ├── <span class="file">app.log</span>
-│   │   └── <span class="file">error.log</span>
-│   └── <span class="folder">cache/</span>
-│       └── <span class="folder">temp_code/</span>            <span class="comment"># File temporanei checker</span>
-│
-├── <span class="folder">scripts/</span>                        <span class="comment"># Script di supporto</span>
-│   ├── <span class="file">download_model.sh</span>           <span class="comment"># Scarica pesi modello</span>
-│   ├── <span class="file">build_frontend.sh</span>           <span class="comment"># Compila Tailwind</span>
-│   ├── <span class="file">run_server.sh</span>               <span class="comment"># Avvio backend + frontend</span>
-│   └── <span class="file">sandbox_test.sh</span>             <span class="comment"># Test di sicurezza</span>
-│
-└── <span class="folder">docs/</span>                           <span class="comment"># Documentazione tecnica</span>
-    ├── <span class="file">SYSTEM_OVERVIEW.md</span>          <span class="comment"># Architettura e componenti</span>
-    ├── <span class="file">API_REFERENCE.md</span>            <span class="comment"># Endpoint /mode1 e /mode2</span>
-    ├── <span class="file">LOCAL_SETUP.md</span>              <span class="comment"># Installazione offline</span>
-    ├── <span class="file">SECURITY_NOTES.md</span>           <span class="comment"># Linee guida sicurezza</span>
-    └── <span class="file">MODEL_GUIDE.md</span>              <span class="comment"># Guida ai modelli compatibili</span>
-</pre>
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('idea1')">Idea 1</div>
+    <div class="tab" onclick="showTab('idea2')">Idea 2</div>
   </div>
+
+  <div class="content">
+    <div id="idea1" class="box">
+      <h1>🧠 Idea 1 — CodeBot Project Overview</h1>
+<pre>
+Project Goals:
+- Explain code, detect errors, fix them
+- Generate code from prompt
+- Fully offline, no API keys
+
+Tech Stack:
+- Frontend: HTML + JS
+- Backend: Python
+- AI Model: Code Llama / StarCoder / GPT-J
+- Libraries: Flask, Transformers
+
+Project Tree:
+offline-codebot/
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── backend/
+│   ├── app.py
+│   ├── model_handler.py
+│   └── utils.py
+├── models/
+│   └── (local AI models)
+├── prompts/
+│   ├── explain.txt
+│   ├── fix.txt
+│   └── generate.txt
+├── README.md
+└── config/
+    └── settings.json
+</pre>
+    </div>
+
+    <div id="idea2" class="box" style="display:none;">
+      <h1>📁 Idea 2 — Full Tree View</h1>
+      <!-- Paste your full tree view HTML here -->
+      <!-- For brevity, I’ll just say: -->
+      <pre>
+        offline-dev-chatbot/
+├── README.md                       # General description and setup guide
+├── LICENSE                         # Project license
+├── .gitignore                      # Files and folders excluded from Git
+├── requirements.txt                # Python dependencies (FastAPI, llama-cpp, etc.)
+├── Dockerfile                      # Offline container build
+├── setup.sh                        # Quick setup script
+│
+├── backend/                        # Main backend in Python (FastAPI)
+│   ├── app.py                      # API server entry point (Mode1, Mode2)
+│   ├── config.py                   # Global configurations
+│   ├── local_llm.py                # Wrapper for the local LLM model
+│   │
+│   ├── prompts/                    # Predefined prompts for the LLM
+│   │   ├── system_prompt.txt       # Base system prompt
+│   │   └── templates/
+│   │       ├── clarify_prompt.txt  # Prompt for clarification requests
+│   │       ├── generator_prompt.txt# Prompt for code/project generation
+│   │       └── code_explainer_prompt.txt # Prompt for code explanations
+│   │
+│   ├── code_check/                 # Code verification modules (Mode 1)
+│   │   ├── __init__.py
+│   │   ├── python_checker.py       # Python analysis (AST, flake8)
+│   │   ├── java_checker.py         # Java compilation and syntax analysis
+│   │   ├── cpp_checker.py          # g++ -fsyntax-only validation
+│   │   ├── js_checker.py           # Local ESLint via Node
+│   │   ├── go_checker.py           # go vet / go fmt
+│   │   └── sql_checker.py          # sqlparse or sqlite3 parser
+│   │
+│   ├── models/                     # Directory for local LLM models
+│   │   ├── README.txt              # Instructions on where to place model weights
+│   │   ├── model.gguf              # Model file (Llama, Phi, Mistral, etc.)
+│   │   └── tokenizer.model         # Compatible tokenizer
+│   │
+│   ├── utils/                      # Utility modules
+│   │   ├── sandbox_runner.py       # Optional sandbox for safe code execution
+│   │   ├── diff_utils.py           # Patch/fix generator
+│   │   ├── file_ops.py             # Temporary file handling
+│   │   └── logging_utils.py        # Centralized logger
+│   │
+│   └── tests/                      # Automated backend tests
+│       ├── test_api.py
+│       ├── test_checkers.py
+│       └── test_llm.py
+│
+├── frontend/                       # Local frontend (HTML + CSS + JS)
+│   ├── index.html                  # Main ChatGPT-style UI
+│   ├── main.js                     # Chat/API logic
+│   ├── style.css                   # Dark mode theme
+│   │
+│   ├── assets/                     # Graphic resources
+│   │   ├── logo.svg
+│   │   └── icons/
+│   │       ├── send.svg
+│   │       ├── code.svg
+│   │       └── terminal.svg
+│   │
+│   └── components/                 # Modular UI components
+│       ├── chat_ui.html            # Chat layout
+│       ├── code_result.html        # Code checker result view
+│       └── project_viewer.html     # Generated project file viewer
+│
+├── data/                           # Local data (fully offline)
+│   ├── history.db                  # SQLite chat/code history
+│   ├── logs/
+│   │   ├── app.log
+│   │   └── error.log
+│   └── cache/
+│       └── temp_code/              # Temporary files generated by checkers
+│
+├── scripts/                        # Support scripts
+│   ├── download_model.sh           # Download LLM weights
+│   ├── build_frontend.sh           # Build Tailwind CSS
+│   ├── run_server.sh               # Run backend + frontend
+│   └── sandbox_test.sh             # Security testing
+│
+└── docs/                           # Technical documentation
+    ├── SYSTEM_OVERVIEW.md          # Architecture and components
+    ├── API_REFERENCE.md            # Endpoint details (/mode1, /mode2)
+    ├── LOCAL_SETUP.md              # Offline setup instructions
+    ├── SECURITY_NOTES.md           # Security guidelines
+    └── MODEL_GUIDE.md              # Guide for compatible LLM models
+        
+<!-- Your full tree view content goes here -->
+(Already provided in your message — paste it inside this <pre> block)
+      </pre>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.box').forEach(box => box.style.display = 'none');
+      document.getElementById(tabId).style.display = 'block';
+      document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+}
+  </script>
 </body>
 </html>
